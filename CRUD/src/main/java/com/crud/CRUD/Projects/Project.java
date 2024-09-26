@@ -1,6 +1,6 @@
-package com.crud.CRUD.News;
+package com.crud.CRUD.Projects;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,19 +15,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class News {
+public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(nullable = false, length = 255)
-    private String titulo;
-    @Column(nullable = false, length = 255)
-    private String encabezado;
-    @Column(columnDefinition = "TEXT", nullable = false)
-    private String cuerpo;
+    private String projectNombre;
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String projectDescripcion;
     @Column(nullable = false)
-    private LocalDateTime fechaPublicacion;
+    private Date fechaInicio;
+    @Column(nullable = false)
+    private Date fechaTermino;
     @Column(nullable = false, length = 100)
     private String autor;
 
