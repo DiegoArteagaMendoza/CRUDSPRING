@@ -1,6 +1,6 @@
 package com.crud.CRUD.Projects;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,14 +20,14 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, length = 100)
     private String projectNombre;
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String projectDescripcion;
     @Column(nullable = false)
-    private Date fechaInicio;
+    private LocalDateTime fechaInicio;
     @Column(nullable = false)
-    private Date fechaTermino;
+    private LocalDateTime fechaTermino;
     @Column(nullable = false, length = 100)
     private String autor;
 

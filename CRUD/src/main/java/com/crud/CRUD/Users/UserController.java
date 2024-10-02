@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,6 +44,18 @@ public class UserController {
         return userService.findAllUsers();
     }
 
+    // buscar usuario por rut
+    @GetMapping("/search/rut/{rut}")
+    public Optional<User> findUserByRut(@PathVariable String rut) {
+        System.out.println(rut);
+        Optional<User> user = userService.findUserByRut(rut);
+        if (user.isPresent()) {
+            return user;
+        } else {
+            return null;
+        }
+    }
+
     // buscar usuario por id
     @GetMapping("/search/{id}")
     public Optional<User> findUserById(@PathVariable int id) {
@@ -57,14 +68,13 @@ public class UserController {
     }
 
     // modificar email usuario por id
-    @PutMapping("/updateEmail/{id}")
-    public ResponseEntity<User> updateUserEmail(@PathVariable int id, @RequestBody String newEmail) {
-        try {
-            User updatedUser = userService.updateUserEmail(id, newEmail);
-            return ResponseEntity.ok(updatedUser); // Retorna el usuario actualizado
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(404).body(null); // Retorna 404 si no encuentra el usuario
-        }
-    }
-
+    // @PutMapping("/updateEmail/{id}")
+    // public ResponseEntity<User> updateUserEmail(@PathVariable int id, @RequestBody String newEmail) {
+    //     try {
+    //         User updatedUser = userService.updateUserEmail(id, newEmail);
+    //         return ResponseEntity.ok(updatedUser); // Retorna el usuario actualizado
+    //     } catch (RuntimeException e) {
+    //         return ResponseEntity.status(404).body(null); // Retorna 404 si no encuentra el usuario
+    //     }
+    // }
 }

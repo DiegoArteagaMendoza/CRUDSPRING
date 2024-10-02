@@ -21,10 +21,29 @@ public class ProjectService {
         }
     }
 
-    public List<Project>findAllProject() {
+    public List<Project> findAllProject() {
         return projectRepository.findAll();
     }
 
-    
+    public Optional<Project> findProjectById(int id) {
+        return projectRepository.findById(id);
+    }
+
+    public boolean deleteProject(int id) {
+        if (projectRepository.existsById(id)) {
+            projectRepository.deleteById(id);
+            return true;
+        } else {
+            System.out.println("El proyecto no existe");
+            return false;
+        }
+    }
+
+    public Project updateNombre(int id, String newNombre) {
+        return projectRepository.findById(id).map(project -> {
+            project.setProjectNombre(newNombre);
+            return projectRepository.save(project);
+        }).orElseThrow(() -> new RuntimeException("Proyecto no encontrado" + id));
+    }
 
 }
